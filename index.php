@@ -2,6 +2,8 @@
 
 include_once 'config/dbconfig.php';
 
+$title = 'COMP208 Foodtracker - Admin Dashboard';
+
 session_start();
 
 $db = new dbconfig();
@@ -57,52 +59,16 @@ $requestCountRow->execute();
 $requestCount = $requestCountRow->fetchColumn();
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>COMP208 Foodtracker - Admin Dashboard</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-</head>
-<body>
 	
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-  <a class="navbar-brand" href="#">Expiration Tracker - Admin Backend</a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-    </ul>
-
-	<?php
-	if ($_SESSION['loggedIn']) {
-		echo '
-			<form class="form-inline my-2 my-lg-0" action="logout.php">
-				<button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
-			</form>
-		';
-	} else {
-		echo '
-			<form class="form-inline my-2 my-lg-0" action="login.php">
-      			<button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
-    		</form>
-		';
-	}
-	?>
-
-  </div>
-
-</nav>
+<?php include('includes/pageStart.php'); ?>
 
 <!-- Beginning of Cards and layout -->
-<div class="container-fluid" style="padding-top: 1.5%;">
+<div class="container-fluid" style="padding-top: 0.25%;">
+
+	<div class="row" style="margin-left: 0.2%">
+		<?php echo '<h2>Welcome, ' . $_SESSION['username'] . '!</h2>'; ?>
+	</div>
+
 	<div class="row">
 
 		<div class="col">
@@ -203,7 +169,4 @@ $requestCount = $requestCountRow->fetchColumn();
 	</div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-</body>
-</html>
+<?php include('includes/pageEnd.php'); ?>

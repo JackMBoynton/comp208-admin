@@ -2,6 +2,8 @@
 
 include_once 'config/dbconfig.php';
 
+$title = 'COMP208 Foodtracker - Admin Login';
+
 session_start();
 
 $db = new dbconfig();
@@ -50,7 +52,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
 				if ($_POST['secretKey'] == '84821CB9014240E2303048260A0BADD5D0E6B219715B6BA9FE5FE7B46DA2D5ED') {
 				
 					$_SESSION['loggedIn'] = true;
-					$_SESSION['username'] = $_POST['username'];
+					$_SESSION['username'] = $Username;
 	
 					header('Location: index.php', TRUE, 301);
 					exit();	
@@ -77,52 +79,12 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
 
 }
 
+include('includes/formPageStart.php');
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>COMP208 Foodtracker - Admin Login</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-	<style>
 
-		.back {
-			background: #e2e2e2;
-			width: 100%;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-		}
 
-		.div-center {
-			width: 400px;
-			height: 400px;
-			background-color: #fff;
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			margin: auto;
-			max-width: 100%;
-			max-height: 100%;
-			overflow: auto;
-			padding: 1em 2em;
-			border-bottom: 3px solid #ccc;
-			display: table;
-			border-radius: 20px;
-		}
-
-		div.content {
-			display: table-cell;
-			vertical-align: middle;
-		}
-
-	</style>
-</head>
 <body>
 	
 	<!-- Login Page below here -->
@@ -161,7 +123,4 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
 		</div>
 	</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-</body>
-</html>
+<?php include('includes/pageEnd.php');
