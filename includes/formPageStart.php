@@ -8,6 +8,10 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 	<style>
 
+		h3 {
+			text-align: center;
+		}
+
 		.back {
 			background: #e2e2e2;
 			width: 100%;
@@ -17,8 +21,8 @@
 		}
 
 		.div-center {
-			width: 400px;
-			height: 400px;
+			width: 40%;
+			height: 40%;
 			background-color: #fff;
 			position: absolute;
 			left: 0;
