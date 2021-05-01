@@ -3,8 +3,8 @@
 include_once 'config/dbconfig.php';
 
 $title = 'COMP208 Foodtracker - Product Management';
-$rowIndex1 = 1;
-$rowIndex2 = 1;
+$productsRowIndex = 1;
+$requestsRowIndex = 1;
 
 session_start();
 
@@ -31,55 +31,63 @@ $requestsStmt->execute();
 <body style="background-color: #DBDBDB">
 	<div class="container">
 
-		<div class="row" style="justify-content: center; margin-top: 0.5%; margin-bottom: 0.5%;">
-			<h1 style="color: #6C757D">Product Management</h1>
-		</div>
-		
-
-		<table class="table table-bordered" style="background-color: #fff">
-			<thead>
-				<tr>
-					<th scope="col">Product No</th>
-					<th scope="col">Name</th>
-					<th scope="col">Barcode</th>
-				</tr>
-			</thead>
-		</tbody>
-		<?php
-			while ($row = $productStmt->fetch()) { ?>
-
-				<tr>
-					<th scope="row"><?php echo $row['ProductNo'] ?></th>
-					<td><?php echo $row['Name'] ?></td>
-					<td><?php echo $row['Barcode'] ?></td>
-					<td>
-					<a style="color: red" class="delete_admin" href="javascript:void(0)" data-admin-id="<?php echo $row['ProductNo']; ?>" data-username="<?php echo $row['Barcode']; ?>">Delete</a>
-					<a style="color: blue" href="admins/editAdmin.php?id=<?php echo $row['ProductNo']; ?>">Edit</a>
-					</td>
-				</tr>
-
-				<?php $rowIndex1++; ?>
-			<?php 
-			}
-			?>
-			</tbody>
-		</table>
-
-
-	
-
-		
 			<div class="row" style="justify-content: center; margin-top: 0.5%; margin-bottom: 0.5%;">
-				<h1 style="color: #6C757D">Product Requests</h1>
+				<h1 style="color: #6C757D">Product Management</h1>
+			</div>
+			
+
+			<table class="table table-bordered" style="background-color: #fff">
+				<thead>
+					<tr>
+						<th scope="col">Product #</th>
+						<th scope="col">Product Name</th>
+						<th scope="col">Product Barcode</th>
+						<th scope="col">Product Actions</th>
+					</tr>
+				</thead>
+			</tbody>
+			<?php
+				while ($row = $productStmt->fetch()) { ?>
+
+					<tr>
+						<th scope="row"><?php echo $row['ProductNo'] ?></th>
+						<td><?php echo $row['Name'] ?></td>
+						<td><?php echo $row['Barcode'] ?></td>
+						<td>
+						<a style="color: blue" href="products/editProduct.php?id=<?php echo $row['ProductNo']; ?>">Edit</a>
+						<a style="color: red" class="delete_product" href="javascript:void(0)" data-product-id="<?php echo $row['ProductNo']; ?>" data-barcode="<?php echo $row['Barcode']; ?>">Delete</a>
+						</td>
+					</tr>
+
+					<?php $productsRowIndex++; ?>
+				<?php 
+				}
+				?>
+				</tbody>
+			</table>
+
+			<div class="row">
+				<div class="col">
+					<form action="products/createProduct.php">
+						<div class="col" style="padding: 0;">
+							<button type="submit" class="btn btn-primary btn-lg btn-block" style="width: 100%;"><b>Add a New Product<b></button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="row" style="justify-content: center; margin-top: 0.5%; margin-bottom: 0.5%;">
+				<h1 style="color: #6C757D">Request Management</h1>
 			</div>
 		
 			<table class="table table-bordered" style="background-color: #fff">
 			<thead>
 				<tr>
-					<th scope="col">Request No</th>
-					<th scope="col">Name</th>
-					<th scope="col">Barcode</th>
-					<th scope="col">User</th>
+					<th scope="col">Request #</th>
+					<th scope="col">Product Name</th>
+					<th scope="col">Product Barcode</th>
+					<th scope="col">User ID Requesting</th>
+					<th scope="col">Product Actions</th>
 				</tr>
 				<?php
 			while ($row = $requestsStmt->fetch()) { ?>
@@ -90,17 +98,20 @@ $requestsStmt->execute();
 					<td><?php echo $row['ProductBarcode'] ?></td>
 					<td><?php echo $row['UserID'] ?></td>
 					<td>
-					<a style="color: blue" href="admins/editAdmin.php?id=<?php echo $row['RequestNo']; ?>">Accept</a>
-					<a style="color: red" class="delete_admin" href="javascript:void(0)" data-admin-id="<?php echo $row['RequestNo']; ?>" data-username="<?php echo $row['ProductName']; ?>">Delete</a>
-				
+						<a style="color: green" class="accept_request" href="javascript:void(0)" data-request-id="<?php echo $row['RequestNo']; ?>" data-productName="<?php echo $row['ProductName']; ?>">Accept</a>
+						<a style="color: red" class="decline_request" href="javascript:void(0)" data-request-id="<?php echo $row['RequestNo']; ?>" data-productName="<?php echo $row['ProductName']; ?>">Decline</a>
 					</td>
 				</tr>
 
-				<?php $rowIndex2++; ?>
+				<?php $requestsRowIndex++; ?>
 			<?php 
 			}
 			?>
 			</tbody>
 		</table>
-		</div>
-	</body>
+		
+	</div>
+
+	<?php include('includes/managementPageEnd.php'); ?>
+
+</body>

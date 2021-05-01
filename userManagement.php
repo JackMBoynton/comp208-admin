@@ -61,6 +61,17 @@ $userStmt->execute();
 
 			</tbody>
 		</table>
+
+		<div class="row">
+			<div class="col">
+				<form action="users/adminCreateUser.php">
+					<div class="col" style="padding: 0;">
+						<button type="submit" class="btn btn-primary btn-lg btn-block" style="width: 100%;"><b>Add a New User<b></button>
+					</div>
+				</form>
+			</div>
+		</div>
+
 	</div>
 
 <?php include('includes/managementPageEnd.php'); ?>
