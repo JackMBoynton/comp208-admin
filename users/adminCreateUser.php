@@ -24,7 +24,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
 
 			$updateStmt->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
 			$updateStmt->bindValue(':user', $_POST['username'], PDO::PARAM_STR);
-			$updateStmt->bindValue(':pwd', $defaultPassword, PDO::PARAM_INT);
+			$updateStmt->bindValue(':pwd', $defaultPassword, PDO::PARAM_STR);
 			$updateStmt->execute();
 
 			if ($updateStmt) {

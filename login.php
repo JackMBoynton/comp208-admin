@@ -24,7 +24,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
 	if (isset($_POST['identifier']) && !empty($_POST['identifier'])) {
 
 		// we know identifier isn't empty, therefore, check if it is email or password
-		if (filter_var($_POST['identifer'], FILTER_VALIDATE_EMAIL)) {
+		if (filter_var($_POST['identifier'], FILTER_VALIDATE_EMAIL)) {
 			$emailStmt->bindValue(':email', $_POST['identifier']);
 			$emailStmt->execute();
 		} else {
@@ -33,7 +33,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
 		}
 
 		// we have executed the statement above, so now we need to get the count of users and the row of the user
-		if (filter_var($_POST['identifer'], FILTER_VALIDATE_EMAIL)) {
+		if (filter_var($_POST['identifier'], FILTER_VALIDATE_EMAIL)) {
 			$count = $emailStmt->rowCount();
 			$row = $emailStmt->fetch();
 		} else {
